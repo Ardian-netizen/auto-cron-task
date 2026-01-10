@@ -1,0 +1,17 @@
+name: Cognix Auto Sesi Trigger
+
+on:
+  schedule:
+    # '*/10' artinya berjalan setiap 10 menit
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger_cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit Cron Checker URL
+        run: |
+          curl -L -X GET "https://weisteriia.gt.tc/service/cron_checker.php" \
+          -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36" \
+          --max-time 120
