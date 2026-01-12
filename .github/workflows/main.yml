@@ -1,0 +1,18 @@
+name: Trigger Cron via Login
+
+on:
+  schedule:
+    # Jalan tiap 10 menit
+    - cron: '*/10 * * * *'
+  # Biar bisa dijalankan manual (klik tombol Run) buat ngetes
+  workflow_dispatch:
+
+jobs:
+  ping_server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit Login Page to Trigger Cron
+        run: |
+          # Ganti URL di bawah ini dengan domain kamu yang asli
+          # Pastikan secret sama dengan yang ada di kodingan PHP index.php
+          curl -L --max-time 30 "http://weisteriia.gt.tc/index.php?source=github&secret=KUNCI_RAHASIA_TA"
