@@ -1,17 +1,22 @@
-name: Cognix Auto Sesi Trigger
+name: Trigger Login Ping
 
 on:
   schedule:
-    # '*/10' artinya berjalan setiap 10 menit
-    - cron: '*/10 * * * *'
+    - cron: '*/10 * * * *' # Jalan tiap 10 menit
   workflow_dispatch:
 
 jobs:
-  trigger_cron:
+  ping_login:
     runs-on: ubuntu-latest
     steps:
-      - name: Hit Cron Checker URL
+      - name: Hit Login URL with Timestamp
         run: |
-          curl -L -X GET "https://weisteriia.gt.tc/service/cron_checker.php" \
-          -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36" \
-          --max-time 120
+          # Ambil waktu sekarang (UTC)
+          CURRENT_TIME=$(date +'%Y-%m-%d_%H:%M:%S')
+          
+          # Kirim ke Login PHP kamu
+          # Ganti URL dengan domain kamu
+          # Kita kirim parameter: ?source=github & time=... & secret=...
+          curl -L -X GET "https://weisteriia.gt.tc/index.php?source=github&time=$CURRENT_TIME&secret=kunci_rahasia_ta" \
+          -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)" \
+          --max-time 30
